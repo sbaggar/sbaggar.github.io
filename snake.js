@@ -10,8 +10,8 @@ let d;
 let game;
 
 let apple = {
-    x: Math.floor(Math.random() * 15 + 1) * box,
-    y: Math.floor(Math.random() * 15 + 1) * box
+    x: Math.floor(Math.random() * 14 + 1) * box,
+    y: Math.floor(Math.random() * 14 + 1) * box
 };
 
 document.addEventListener('keydown', direction);
@@ -34,12 +34,10 @@ function draw() {
     // Draw game area border
     context.strokeStyle = 'white';
     context.lineWidth = box;
-    context.strokeRect(box, box, 15 * box, 15 * box);
+    context.strokeRect(box, box, 14 * box, 14 * box);
 
     // ...
-}
 
-    
     for(let i = 0; i < snake.length; i++) {
         context.fillStyle = (i == 0) ? 'green' : 'white';
         context.fillRect(snake[i].x, snake[i].y, box, box);
@@ -62,8 +60,8 @@ function draw() {
     if(snakeX == apple.x && snakeY == apple.y) {
         score++;
         apple = {
-            x: Math.floor(Math.random() * 15 + 1) * box,
-            y: Math.floor(Math.random() * 15 + 1) * box
+            x: Math.floor(Math.random() * 14 + 1) * box,
+            y: Math.floor(Math.random() * 14 + 1) * box
         };
     } else {
         snake.pop();
@@ -74,7 +72,7 @@ function draw() {
         y: snakeY
     };
 
-    if(snakeX < 0 || snakeX > 15 * box || snakeY < 0 || snakeY > 15 * box || collision(newHead, snake)) {
+    if(snakeX < box || snakeX > 14 * box || snakeY < box || snakeY > 14 * box || collision(newHead, snake)) {
         clearInterval(game);
     }
     
