@@ -29,7 +29,8 @@ nav {
 }
 
 #section1 {
-    margin-bottom: 150px;
+    margin-bottom: 120px;  /* adjust this value to increase/decrease the space */
+}
     
 nav ul {
     list-style-type: none;
