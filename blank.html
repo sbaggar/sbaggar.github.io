@@ -11,15 +11,26 @@
                 margin: 0;
                 background-color: #fff;
             }
-            #square {
+            #big-square {
                 width: 45vw;
                 height: 45vw; /* Use the same viewport unit for height and width */
                 background-color: white;
                 border: 2px solid black;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            #small-square {
+                width: 5vw;
+                height: 5vw;
+                background-color: red;
             }
         </style>
     </head>
     <body>
-        <div id="square"></div>
+        <div id="big-square">
+            <div id="small-square"></div>
+        </div>
     </body>
 </html>
