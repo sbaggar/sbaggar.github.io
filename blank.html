@@ -12,6 +12,7 @@
                 background-color: #fff;
             }
             #big-square {
+                position: relative;
                 width: 45vw;
                 height: 45vw; /* Use the same viewport unit for height and width */
                 background-color: white;
@@ -22,11 +23,33 @@
                 align-items: center;
             }
             #small-square {
+                position: absolute;
                 width: 1vw;
                 height: 1vw;
                 background-color: red;
             }
         </style>
+        <script>
+            window.onload = function() {
+                var smallSquare = document.getElementById("small-square");
+                var speed = 5;
+                window.onkeydown = function(e) {
+                    var key = e.keyCode;
+                    if(key === 37){
+                        smallSquare.style.left = (smallSquare.offsetLeft - speed) + "px";
+                    }
+                    else if(key === 38){
+                        smallSquare.style.top = (smallSquare.offsetTop - speed) + "px";
+                    }
+                    else if(key === 39){
+                        smallSquare.style.left = (smallSquare.offsetLeft + speed) + "px";
+                    }
+                    else if(key === 40){
+                        smallSquare.style.top = (smallSquare.offsetTop + speed) + "px";
+                    }
+                };
+            };
+        </script>
     </head>
     <body>
         <div id="big-square">
