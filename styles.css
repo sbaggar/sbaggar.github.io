@@ -1,5 +1,7 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: Helvetica, sans-serif;
+    background-color: #006400; /* This is dark green */
+    color: white; /* This is to make the text color white so it's readable against the dark green background */
 }
 
 header, nav, main, footer {
@@ -7,11 +9,12 @@ header, nav, main, footer {
 }
 
 header {
-    background-color: #f8f9fa;
+    background-color: #228B22; /* This is forest green */
+    color: white; /* This is to make the header text color white */
 }
 
 nav {
-    background-color: #e9ecef;
+    background-color: #228B22;
 }
 
 nav ul {
@@ -25,10 +28,10 @@ nav ul li {
 }
 
 main {
-    background-color: #fdfdfe;
+    background-color: #228B22;
 }
 
 footer {
-    background-color: #f8f9fa;
+    background-color: #228B22;
     text-align: center;
 }
