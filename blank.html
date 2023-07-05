@@ -18,6 +18,9 @@
             canvas {
                 border: 1px solid #fff;
             }
+
+            <button id="resetButton">Reset Game</button>
+
         </style>
     </head>
     <body>
@@ -91,6 +94,26 @@
             }
 
             let game = setInterval(draw, 100);
+
+            // Add an event listener to the reset button
+document.getElementById("resetButton").addEventListener("click", resetGame);
+
+function resetGame() {
+    // Reset game variables
+    snake = [{x: 9 * box, y: 10 * box}]; // Reset the snake
+    score = 0; // Reset the score
+    d = undefined; // Reset the direction
+    // Reset the apple position
+    apple = {
+        x: Math.floor(Math.random() * 15 + 1) * box,
+        y: Math.floor(Math.random() * 15 + 1) * box
+    };
+
+    // Restart the game interval
+    clearInterval(game);
+    game = setInterval(draw, 100);
+}
+
         </script>
     </body>
 </html>
