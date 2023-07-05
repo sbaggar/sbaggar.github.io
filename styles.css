@@ -12,6 +12,8 @@ header {
     background-color: #228B22; /* This is forest green */
     color: white; /* This is to make the header text color white */
 }
+#section1 {
+    margin-bottom: 50px;
 
 nav {
     background-color: #228B22;
