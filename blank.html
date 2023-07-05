@@ -1,119 +1,123 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Snake Game</title>
-        <style>
-            body {
-                background-color: #000;
-                color: #fff;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                height: 100vh;
-                margin: 0;
-                overflow: hidden;
-                font-family: Arial, sans-serif;
+<head>
+    <title>Snake Game</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #game {
+            position: relative;
+            height: 500px;
+            width: 500px;
+        }
+
+        #score {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        #resetButton {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="game" width="500" height="500"></canvas>
+    <button id="resetButton">Reset Game</button>
+    <div id="score">Score: 0</div>
+    <script>
+        let canvas = document.getElementById('game');
+        let context = canvas.getContext('2d');
+        let box = 20;
+        let score = 0;
+        let game;
+        let d;
+        let snake = [];
+        snake[0] = {x: 10 * box, y: 10 * box};
+        let apple = {
+            x: Math.floor(Math.random() * 25) * box,
+            y: Math.floor(Math.random() * 25) * box
+        };
+
+        document.addEventListener('keydown', direction);
+
+        function direction(event) {
+            if(event.keyCode == 37 && d != "RIGHT") {
+                d = "LEFT";
+            } else if(event.keyCode == 38 && d != "DOWN") {
+                d = "UP";
+            } else if(event.keyCode == 39 && d != "LEFT") {
+                d = "RIGHT";
+            } else if(event.keyCode == 40 && d != "UP") {
+                d = "DOWN";
             }
+        }
 
-            canvas {
-                border: 1px solid #fff;
+        function collision(head, array) {
+            for(let i = 0; i < array.length; i++) {
+                if(head.x == array[i].x && head.y == array[i].y) {
+                    return true;
+                }
             }
+            return false;
+        }
 
-            <button id="resetButton">Reset Game</button>
+        function draw() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            for(let i = 0; i < snake.length; i++) {
+                context.fillStyle = (i == 0) ? 'green' : 'white';
+                context.fillRect(snake[i].x, snake[i].y, box, box);
+            }
+            context.fillStyle = 'red';
+            context.fillRect(apple.x, apple.y, box, box);
+            let snakeX = snake[0].x;
+            let snakeY = snake[0].y;
+            if(d == "LEFT") snakeX -= box;
+            if(d == "UP") snakeY -= box;
+            if(d == "RIGHT") snakeX += box;
+            if(d == "DOWN") snakeY += box;
+            if(snakeX == apple.x && snakeY == apple.y) {
+                score++;
+                apple = {
+                    x: Math.floor(Math.random() * 25) * box,
+                    y: Math.floor(Math.random() * 25) * box
+                };
+            } else {
+                snake.pop();
+            }
+            let newHead = { x: snakeX, y: snakeY };
+            if(snakeX < 0 || snakeX > 24 * box || snakeY < 0 || snakeY > 24 * box || collision(newHead, snake)) {
+                clearInterval(game);
+            }
+            snake.unshift(newHead);
+            document.getElementById('score').innerText = "Score: " + score;
+        }
 
-        </style>
-    </head>
-    <body>
-        <canvas id="game" width="512" height="512"></canvas>
-        <script>
-            const box = 32;
-            let score = 0;
-            let snake = [];
-            snake[0] = { x: 9 * box, y: 10 * box };
-            let d;
-            let food = {
-                x: Math.floor(Math.random() * 15 + 1) * box,
-                y: Math.floor(Math.random() * 15 + 1) * box
+        function resetGame() {
+            snake = [{x: 10 * box, y: 10 * box}];
+            score = 0;
+            d = undefined;
+            apple = {
+                x: Math.floor(Math.random() * 25) * box,
+                y: Math.floor(Math.random() * 25) * box
             };
+            clearInterval(game);
+            game = setInterval(draw, 100);
+        }
 
-            const canvas = document.getElementById('game');
-            const ctx = canvas.getContext('2d');
+        document.getElementById("resetButton").addEventListener("click", resetGame);
 
-            document.addEventListener('keydown', direction);
-
-            function direction(event) {
-                if (event.keyCode === 37 && d !== 'RIGHT') {
-                    d = 'LEFT';
-                } else if (event.keyCode === 38 && d !== 'DOWN') {
-                    d = 'UP';
-                } else if (event.keyCode === 39 && d !== 'LEFT') {
-                    d = 'RIGHT';
-                } else if (event.keyCode === 40 && d !== 'UP') {
-                    d = 'DOWN';
-                }
-            }
-
-            function draw() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                for (let i = 0; i < snake.length; i++) {
-                    ctx.fillStyle = (i === 0) ? 'green' : 'white';
-                    ctx.fillRect(snake[i].x, snake[i].y, box, box);
-                }
-
-                ctx.fillStyle = 'red';
-                ctx.fillRect(food.x, food.y, box, box);
-
-                let snakeX = snake[0].x;
-                let snakeY = snake[0].y;
-
-                if (d === 'LEFT') snakeX -= box;
-                if (d === 'UP') snakeY -= box;
-                if (d === 'RIGHT') snakeX += box;
-                if (d === 'DOWN') snakeY += box;
-
-                if (snakeX === food.x && snakeY === food.y) {
-                    score++;
-                    food = {
-                        x: Math.floor(Math.random() * 15 + 1) * box,
-                        y: Math.floor(Math.random() * 15 + 1) * box
-                    };
-                } else {
-                    snake.pop();
-                }
-
-                let newHead = { x: snakeX, y: snakeY };
-
-                if (snakeX < 0 || snakeX > 15 * box || snakeY < 0 || snakeY > 15 * box) {
-                    clearInterval(game);
-                }
-
-                snake.unshift(newHead);
-                ctx.fillStyle = 'white';
-                ctx.font = '45px Changa one';
-                ctx.fillText(score, 2 * box, 1.6 * box);
-            }
-
-            let game = setInterval(draw, 100);
-
-            // Add an event listener to the reset button
-document.getElementById("resetButton").addEventListener("click", resetGame);
-
-function resetGame() {
-    // Reset game variables
-    snake = [{x: 9 * box, y: 10 * box}]; // Reset the snake
-    score = 0; // Reset the score
-    d = undefined; // Reset the direction
-    // Reset the apple position
-    apple = {
-        x: Math.floor(Math.random() * 15 + 1) * box,
-        y: Math.floor(Math.random() * 15 + 1) * box
-    };
-
-    // Restart the game interval
-    clearInterval(game);
-    game = setInterval(draw, 100);
-}
-
-        </script>
-    </body>
+        game = setInterval(draw, 100);
+    </script>
+</body>
 </html>
