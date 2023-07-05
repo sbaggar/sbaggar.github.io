@@ -28,13 +28,18 @@ function direction(event) {
     }
 }
 
-function draw() {
-    context.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Draw game area border
+
+let box = 16;
+// ...
+
+function draw() {
+    // ...
     context.strokeStyle = 'white';
-    context.lineWidth = box;
-    context.strokeRect(box, box, 14 * box, 14 * box);
+    context.strokeRect(0, 0, canvas.width, canvas.height);
+    // ...
+}
+
 
     // ...
 
@@ -93,3 +98,5 @@ function collision(head, array) {
 }
 
 game = setInterval(draw, 100);
+
+
