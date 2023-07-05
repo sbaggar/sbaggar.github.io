@@ -13,6 +13,17 @@ header {
     color: white; /* This is to make the header text color white */
 }
 
+#profile-pic {
+    width: 150px;
+    height: auto;
+    border: 5px solid white;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #000;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
 nav {
     background-color: #228B22;
 }
