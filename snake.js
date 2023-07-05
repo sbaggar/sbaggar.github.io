@@ -31,16 +31,14 @@ function direction(event) {
 function draw() {
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-    {
-    //...
-
     // Draw game area border
     context.strokeStyle = 'white';
     context.lineWidth = box;
-    context.strokeRect(0, 0, 16 * box, 16 * box);
+    context.strokeRect(box, box, 15 * box, 15 * box);
 
-    //...
+    // ...
 }
+
     
     for(let i = 0; i < snake.length; i++) {
         context.fillStyle = (i == 0) ? 'green' : 'white';
