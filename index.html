@@ -31,23 +31,10 @@
             </section>
 
             <div class="fade-in-section hidden">
-                <img src="stats.jpg" alt="sbaggistikk">
+                <img src="stats.JPG" alt="sbaggistikk">
             </div>
         </main>
-        <script>
-            let fadeInSection = document.querySelector('.fade-in-section');
-            let fadeInAt;
-
-            function checkSlide(e) {
-                fadeInAt = (window.scrollY + window.innerHeight) - fadeInSection.offsetHeight / 2;
-                let offsetTop = fadeInSection.offsetTop - parseInt(window.getComputedStyle(fadeInSection).marginTop, 10);
-                if (fadeInAt > offsetTop) {
-                    fadeInSection.classList.add('is-visible');
-                }
-            }
-
-            window.addEventListener('scroll', checkSlide);
-        </script>
+        <script src="script.js"></script>
         <footer>
             <p>Copyright &copy; 2023 sbaggar's fyrsta heimasíða</p>
         </footer>
