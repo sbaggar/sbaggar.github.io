@@ -64,9 +64,12 @@ footer {
 .content-section {
     display: flex;
     justify-content: space-between;
+
 }
 
 .content-section .content-image {
     max-width: 50%;
     height: auto;
+    margin-left: 30px;  /* adjust this value as needed */
 }
+
