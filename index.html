@@ -6,15 +6,14 @@
     </head>
     <body>
         <header>
-    <h1>Vælkomin til sbaggar's heimasíðu, hvar dreymar verða til veruleiki! </h1>
-    <img id="profile-pic" src="358344672_548304417334237_3620862946292961855_n.jpg" alt="My profile picture">
-</header>
+            <h1>Vælkomin til sbaggar's heimasíðu, hvar dreymar verða til veruleiki! </h1>
+            <img id="profile-pic" src="358344672_548304417334237_3620862946292961855_n.jpg" alt="My profile picture">
+        </header>
         <nav>
             <ul>
                 <li><a href="#section1">Størv</a></li>
                 <li><a href="#section2">Útbúgving</a></li>
                 <a href="blank.html" target="_blank">Spæl sbagg-snake</a>
-
             </ul>
         </nav>
         <main>
@@ -41,7 +40,8 @@
 
             function checkSlide(e) {
                 fadeInAt = (window.scrollY + window.innerHeight) - fadeInSection.offsetHeight / 2;
-                if (fadeInAt > fadeInSection.offsetTop) {
+                let offsetTop = fadeInSection.offsetTop - parseInt(window.getComputedStyle(fadeInSection).marginTop, 10);
+                if (fadeInAt > offsetTop) {
                     fadeInSection.classList.add('is-visible');
                 }
             }
