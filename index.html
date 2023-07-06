@@ -35,6 +35,21 @@
     <img src="stats.jpg" alt="Your Image">
 </div>
 
+             <script>
+            let fadeInSection = document.querySelector('.fade-in-section');
+            let fadeInAt;
+
+            function checkSlide(e) {
+                fadeInAt = (window.scrollY + window.innerHeight) - fadeInSection.offsetHeight / 2;
+                if (fadeInAt > fadeInSection.offsetTop) {
+                    fadeInSection.classList.add('is-visible');
+                }
+            }
+
+            window.addEventListener('scroll', checkSlide);
+        </script>
+    </body>
+</html>
             
             
         </main>
