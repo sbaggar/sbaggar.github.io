@@ -36,6 +36,7 @@
             let snake = [];
             let d;
             let game;
+            let gameOver = false;
             let apple = {
                 x: Math.floor(Math.random() * 19 + 1) * box,
                 y: Math.floor(Math.random() * 19 + 1) * box
@@ -99,7 +100,8 @@
                 };
 
                 if(snakeX < 0 || snakeX > 19 * box || snakeY < 0 || snakeY > 19 * box || collision(newHead, snake)) {
-                    resetGame();
+                    gameOver = true;
+                    return;
                 }
                 
                 snake.unshift(newHead);
@@ -124,10 +126,18 @@
                     x: Math.floor(Math.random() * 19 + 1) * box,
                     y: Math.floor(Math.random() * 19 + 1) * box
                 };
-                game = setInterval(draw, 100);
+                gameOver = false;
+                game = setInterval(function() {
+                    draw();
+                    if (gameOver) {
+                        clearInterval(game);
+                        alert('Game Over');
+                    }
+                }, 100);
             }
 
             resetGame();
         </script>
     </body>
 </html>
+
