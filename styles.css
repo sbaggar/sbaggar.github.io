@@ -9,8 +9,8 @@ header, nav, main, footer {
 }
 
 header {
-    background-color: #228B22;
-    color: white;
+    background-color: #228B22; /* This is forest green */
+    color: white; /* This is to make the header text color white */
 }
 
 #profile-pic {
@@ -29,9 +29,9 @@ nav {
 }
 
 #section1 {
-    margin-bottom: 120px;
+    margin-bottom: 120px;  /* adjust this value to increase/decrease the space */
 }
-
+    
 nav ul {
     list-style-type: none;
     padding: 0;
@@ -54,7 +54,7 @@ footer {
 .fade-in-section {
     opacity: 0;
     transition: opacity 1s;
-    margin-top: 100vh; /* or any other value that works for you */
+    margin-top: 100vh; /* push the image down by the height of the viewport */
 }
 
 .fade-in-section.is-visible {
