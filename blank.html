@@ -1,49 +1,5 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Snake Game</title>
-    <style>
-        body {
-            background-color: #000;
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        #game {
-            position: relative;
-            height: 500px;
-            width: 500px;
-            border: 1px solid #fff; /* This is the border */
-        }
-
-        #score {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-        }
-
-        #resetButton {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-    </style>
-</head>
-<body>
-    <canvas id="game" width="500" height="500"></canvas>
-    <button id="resetButton">Reset Game</button>
-    <div id="score">Score: 0</div>
-    <script>
-        //...The rest of your JavaScript code...
-    </script>
-</body>
-</html>
-
-<!DOCTYPE html>
-<html>
     <head>
         <title>Blank Page</title>
         <style>
@@ -80,7 +36,10 @@
             let snake = [];
             let d;
             let game;
-            let apple;
+            let apple = {
+                x: Math.floor(Math.random() * 19 + 1) * box,
+                y: Math.floor(Math.random() * 19 + 1) * box
+            };
             snake[0] = {x: 10 * box, y: 10 * box};
             let canvas = document.getElementById('gameArea');
             let context = canvas.getContext('2d');
@@ -139,33 +98,33 @@
                     y: snakeY
                 };
 
-                if(snakeX < 0 || snakeX > 19 * box || snakeY < 0 || snakeY > 19 * box || collision(newHead, snake)) {resetGame();
+                if(snakeX < 0 || snakeX > 19 * box || snakeY < 0 || snakeY > 19 * box || collision(newHead, snake)) {
+                    resetGame();
                 }
                 
                 snake.unshift(newHead);
             }
 
-         function collision(head, array) {
-    for(let i = 0; i < array.length; i++) {
-        if(head.x == array[i].x && head.y == array[i].y) {
-            return true;
-        }
-    }
-    return false;
+            function collision(head, array) {
+                for(let i = 0; i < array.length; i++) {
+                    if(head.x == array[i].x && head.y == array[i].y) {
+                        return true;
+                    }
+                }
+                return false;
             }
 
             function resetGame() {
-    clearInterval(game); // Clear the game interval
-    snake = [{x: 10 * box, y: 10 * box}];
-    d = undefined;
-    score = 0;
-    document.getElementById('score').innerHTML = "Score: " + score;
-    apple = {
-        x: Math.floor(Math.random() * 19 + 1) * box,
-        y: Math.floor(Math.random() * 19 + 1) * box
-    };
-    game = setInterval(draw, 100);
-                }
+                clearInterval(game); // Clear the game interval
+                snake = [{x: 10 * box, y: 10 * box}];
+                d = undefined;
+                score = 0;
+                document.getElementById('score').innerHTML = "Score: " + score;
+                apple = {
+                    x: Math.floor(Math.random() * 19 + 1) * box,
+                    y: Math.floor(Math.random() * 19 + 1) * box
+                };
+                game = setInterval(draw, 100);
             }
 
             resetGame();
