@@ -23,12 +23,25 @@
                 width: 20vmin;
                 height: 5vmin;
             }
+            #highScores {
+                position: absolute;
+                top: 2vmin;
+                left: 2vmin;
+            }
+            #highScoresList {
+                padding: 0;
+                list-style-type: none;
+            }
         </style>
     </head>
     <body>
         <canvas id="gameArea"></canvas>
         <button id="resetButton" onclick="resetGame()">Reset Game</button>
         <p id="score"></p>
+        <div id="highScores">
+            <h2>High Scores</h2>
+            <ul id="highScoresList"></ul>
+        </div>
 
         <script>
             const box = 20;
@@ -44,6 +57,8 @@
             snake[0] = {x: 10 * box, y: 10 * box};
             let canvas = document.getElementById('gameArea');
             let context = canvas.getContext('2d');
+
+            let highScores = JSON.parse(localStorage.getItem('highScores')) || [];
 
             canvas.height = canvas.width = 20 * box;
 
@@ -101,6 +116,13 @@
 
                 if(snakeX < 0 || snakeX >= 20 * box || snakeY < 0 || snakeY >= 20 * box || collision(newHead, snake)) {
                     gameOver = true;
+                    clearInterval(game);
+                    let name = prompt('Game Over! Enter your name:');
+                    highScores.push({ name: name, score: score });
+                    highScores.sort((a, b) => b.score - a.score);
+                    highScores = highScores.slice(0, 10);
+                    localStorage.setItem('highScores', JSON.stringify(highScores));
+                    updateHighScores();
                     return;
                 }
                 
@@ -116,23 +138,28 @@
                 return false;
             }
 
+            function updateHighScores() {
+                let highScoresList = document.getElementById('highScoresList');
+                highScoresList.innerHTML = highScores.map(score => `<li>${score.name}: ${score.score}</li>`).join('');
+            }
+
             function resetGame() {
                 clearInterval(game); // Clear the game interval
                 snake = [{x: 10 * box, y: 10 * box}];
                 d = undefined;
                 score = 0;
-                document.getElementById('score').innerHTML = "Score: " + score;
+                document.getElementById('I apologize for the cut-off, here's the rest of the code:
+
+```html
+                score.innerHTML = "Score: " + score;
                 apple = {
                     x: Math.floor(Math.random() * 19 + 1) * box,
                     y: Math.floor(Math.random() * 19 + 1) * box
                 };
                 gameOver = false;
+                updateHighScores();
                 game = setInterval(function() {
                     draw();
-                    if (gameOver) {
-                        clearInterval(game);
-                        alert('Game Over');
-                    }
                 }, 100);
             }
 
